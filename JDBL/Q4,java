@@ -1,28 +1,41 @@
 public boolean transferCredits(int fromStudentId, int toStudentId, int credits) {
     Connection conn = null;
+    PreparedStatement deduct = null;
+    PreparedStatement add = null;
     try {
         conn = DBUtil.getConnection();
-        conn.setAutoCommit(false); // Start transaction
+        conn.setAutoCommit(false); 
 
-        PreparedStatement deduct = conn.prepareStatement("UPDATE students SET gpa = gpa - ? WHERE id = ?");
+        deduct = conn.prepareStatement("UPDATE students SET gpa = gpa - ? WHERE id = ?");
         deduct.setDouble(1, credits);
         deduct.setInt(2, fromStudentId);
-        deduct.executeUpdate();
+        int rowsDeducted = deduct.executeUpdate();
 
-        PreparedStatement add = conn.prepareStatement("UPDATE students SET gpa = gpa + ? WHERE id = ?");
+       
+        add = conn.prepareStatement("UPDATE students SET gpa = gpa + ? WHERE id = ?");
         add.setDouble(1, credits);
         add.setInt(2, toStudentId);
-        add.executeUpdate();
+        int rowsAdded = add.executeUpdate();
 
-        conn.commit(); // Commit transaction
-        return true;
+        
+        if (rowsDeducted == 1 && rowsAdded == 1) {
+            conn.commit();
+            return true;
+        } else {
+            conn.rollback();
+            return false;
+        }
     } catch (SQLException e) {
         try {
-            if (conn != null) conn.rollback(); // Roll back on failure
+            if (conn != null) conn.rollback(); // Rollback on failure
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         e.printStackTrace();
         return false;
+    } finally {
+        try { if (deduct != null) deduct.close(); } catch (SQLException e) { e.printStackTrace(); }
+        try { if (add != null) add.close(); } catch (SQLException e) { e.printStackTrace(); }
+        try { if (conn != null) conn.setAutoCommit(true); conn.close(); } catch (SQLException e) { e.printStackTrace(); }
     }
 }
