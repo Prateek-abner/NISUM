@@ -1,0 +1,28 @@
+public boolean transferCredits(int fromStudentId, int toStudentId, int credits) {
+    Connection conn = null;
+    try {
+        conn = DBUtil.getConnection();
+        conn.setAutoCommit(false); // Start transaction
+
+        PreparedStatement deduct = conn.prepareStatement("UPDATE students SET gpa = gpa - ? WHERE id = ?");
+        deduct.setDouble(1, credits);
+        deduct.setInt(2, fromStudentId);
+        deduct.executeUpdate();
+
+        PreparedStatement add = conn.prepareStatement("UPDATE students SET gpa = gpa + ? WHERE id = ?");
+        add.setDouble(1, credits);
+        add.setInt(2, toStudentId);
+        add.executeUpdate();
+
+        conn.commit(); // Commit transaction
+        return true;
+    } catch (SQLException e) {
+        try {
+            if (conn != null) conn.rollback(); // Roll back on failure
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        e.printStackTrace();
+        return false;
+    }
+}
