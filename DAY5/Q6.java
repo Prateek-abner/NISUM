@@ -9,7 +9,7 @@ public class DeleteData {
         String password = "root@123";
 
         Connection connection = DriverManager.getConnection(url, username, password);
-        PreparedStatement ps = connection.prepareStatement("DELETE FROM newtable1 WHERE student_id = ?");
+        PreparedStatement ps = connection.prepareStatement("DELETE FROM jdbc.newtable1 WHERE student_id = ?");
 
         ps.setString(1, "s002");
 
