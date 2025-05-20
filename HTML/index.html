@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple SPA</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Simple SPA</h1>
+    <nav>
+      <ul>
+        <li><a href="#home" id="link-home">Home</a></li>
+        <li><a href="#about" id="link-about">About</a></li>
+        <li><a href="#contact" id="link-contact">Contact</a></li>
+        <li><a href="#weather" id="link-weather">Weather</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section id="home" class="spa-section">
+      <h2>Home</h2>
+      <p>Welcome to the Home page of our SPA!</p>
+      <img src="https://via.placeholder.com/300x150" alt="Home Image">
+    </section>
+    <section id="about" class="spa-section" style="display:none;">
+      <h2>About</h2>
+      <p>This is a simple Single Page Application example.</p>
+      <ul>
+        <li>Easy navigation</li>
+        <li>Semantic HTML</li>
+        <li>Responsive design</li>
+      </ul>
+    </section>
+    <section id="contact" class="spa-section" style="display:none;">
+      <h2>Contact</h2>
+      <form>
+        <label>Name: <input type="text"></label><br>
+        <label>Email: <input type="email"></label><br>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+    <section id="weather" class="spa-section" style="display:none;">
+      <h2>Weather App</h2>
+      <div class="weather-app">
+        <header class="weather-header">
+          <h3>Weather Forecast</h3>
+          <input type="text" placeholder="Search city...">
+        </header>
+        <div class="weather-details">
+          <div>
+            <img src="https://cdn-icons-png.flaticon.com/512/1163/1163661.png" alt="Weather Icon" width="60">
+            <span>25°C</span>
+          </div>
+          <div>
+            <ul>
+              <li>Humidity: 60%</li>
+              <li>Wind: 10 km/h</li>
+              <li>Pressure: 1012 hPa</li>
+            </ul>
+          </div>
+        </div>
+        <div class="weather-forecast">
+          <div class="forecast-day">
+            <span>Mon</span>
+            <img src="https://cdn-icons-png.flaticon.com/512/1163/1163661.png" alt="Icon" width="40">
+            <span>24°C</span>
+          </div>
+          <div class="forecast-day">
+            <span>Tue</span>
+            <img src="https://cdn-icons-png.flaticon.com/512/1163/1163661.png" alt="Icon" width="40">
+            <span>22°C</span>
+          </div>
+          <div class="forecast-day">
+            <span>Wed</span>
+            <img src="https://cdn-icons-png.flaticon.com/512/1163/1163661.png" alt="Icon" width="40">
+            <span>26°C</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Simple SPA</p>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
