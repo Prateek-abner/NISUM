@@ -1,0 +1,28 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #222;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.fancy-btn {
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 30px; /* Rounded corners */
+  background: linear-gradient(45deg, #ff6a00, #ee0979); /* Gradient */
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+  box-shadow: 0 4px 10px rgba(238, 9, 121, 0.6);
+}
+
+.fancy-btn:hover {
+  transform: scale(1.1); /* Scale up */
+  background: linear-gradient(45deg, #ee0979, #ff6a00); /* Reverse gradient on hover */
+  box-shadow: 0 6px 15px rgba(238, 9, 121, 0.9);
+}
