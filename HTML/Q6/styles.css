@@ -1,0 +1,22 @@
+/* Center content using Flexbox */
+.container {
+  display: flex;
+  justify-content: center;  /* center horizontally */
+  align-items: center;      /* center vertically */
+  height: 100vh;            /* full height of the viewport */
+}
+
+/* Style for the boxes */
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: tomato;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+}
