@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Grades Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f4f4f4;
+    }
+    table {
+      width: 60%;
+      border-collapse: collapse;
+      margin: auto;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    thead {
+      background-color: #007BFF;
+      color: white;
+    }
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+    tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    tfoot {
+      background-color: #e9ecef;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Subject</th>
+        <th>Marks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Alice Johnson</td>
+        <td>Math</td>
+        <td>89</td>
+      </tr>
+      <tr>
+        <td>Bob Smith</td>
+        <td>Science</td>
+        <td>94</td>
+      </tr>
+      <tr>
+        <td>Charlie Lee</td>
+        <td>English</td>
+        <td>78</td>
+      </tr>
+      <tr>
+        <td>Diana Green</td>
+        <td>History</td>
+        <td>85</td>
+      </tr>
+      <tr>
+        <td>Eric Brown</td>
+        <td>Geography</td>
+        <td>91</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2">Average Marks</td>
+        <td>87.4</td>
+      </tr>
+    </tfoot>
+  </table>
+
+</body>
+</html>
