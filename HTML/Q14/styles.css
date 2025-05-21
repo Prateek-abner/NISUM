@@ -1,0 +1,25 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+}
+
+.transform-box {
+  background-color: #3498db;
+  color: white;
+  padding: 40px 60px;
+  font-size: 1.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  user-select: none;
+}
+
+/* On hover: rotate 15deg, scale up by 1.1, and translate right by 20px */
+.transform-box:hover {
+  transform: rotate(15deg) scale(1.1) translateX(20px);
+}
