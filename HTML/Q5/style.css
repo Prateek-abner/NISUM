@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <h1>Weather App</h1>
+    <input type="text" placeholder="Search city..." class="search-input" />
+  </header>
+
+  <main class="container">
+    <section class="weather-details">
+      <div class="city-temp">
+        <h2>New York</h2>
+        <p class="temp">22°C</p>
+        <p class="desc">Sunny</p>
+      </div>
+      <div class="weather-icons">
+        <img src="https://via.placeholder.com/60" alt="weather icon" />
+      </div>
+      <div class="extra-info">
+        <p>Humidity: 60%</p>
+        <p>Wind: 10 km/h</p>
+        <p>Pressure: 1012 hPa</p>
+      </div>
+    </section>
+
+    <section class="weather-forecast">
+      <h3>5-Day Forecast</h3>
+      <div class="forecast-grid">
+        <div class="forecast-card">
+          <p>Mon</p>
+          <img src="https://via.placeholder.com/40" alt="icon">
+          <p>21°C</p>
+        </div>
+        <div class="forecast-card">
+          <p>Tue</p>
+          <img src="https://via.placeholder.com/40" alt="icon">
+          <p>23°C</p>
+        </div>
+        <div class="forecast-card">
+          <p>Wed</p>
+          <img src="https://via.placeholder.com/40" alt="icon">
+          <p>19°C</p>
+        </div>
+        <div class="forecast-card">
+          <p>Thu</p>
+          <img src="https://via.placeholder.com/40" alt="icon">
+          <p>20°C</p>
+        </div>
+        <div class="forecast-card">
+          <p>Fri</p>
+          <img src="https://via.placeholder.com/40" alt="icon">
+          <p>22°C</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Weather App</p>
+  </footer>
+</body>
+</html>
