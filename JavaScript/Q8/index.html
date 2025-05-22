@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User List Filter by City</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f8f8f8; }
+    #container { max-width: 500px; margin: 40px auto; background: #fff; padding: 24px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);}
+    #citySelect { margin-bottom: 20px; padding: 6px 12px; border-radius: 4px; border: 1px solid #ccc; }
+    ul { list-style: none; padding: 0; }
+    li { margin-bottom: 14px; }
+    .email { color: #1976d2; font-size: 0.95em; }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h2>User List</h2>
+    <label for="citySelect"><strong>Filter by City:</strong></label>
+    <select id="citySelect">
+      <option value="">-- Select a city --</option>
+    </select>
+    <ul id="userList"></ul>
+  </div>
+  <script>
+    let usersData = [];
+
+    // Fetch users and initialize UI
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(users => {
+        usersData = users;
+        populateCities(users);
+        displayUsers(users); // Show all users by default
+      })
+      .catch(error => {
+        document.getElementById('userList').innerHTML = '<li>Failed to load users.</li>';
+        console.error('Error fetching users:', error);
+      });
+
+    // Populate dropdown with unique city names
+    function populateCities(users) {
+      const citySelect = document.getElementById('citySelect');
+      const cities = [...new Set(users.map(user => user.address.city))].sort();
+      cities.forEach(city => {
+        const option = document.createElement('option');
+        option.value = city;
+        option.textContent = city;
+        citySelect.appendChild(option);
+      });
+    }
+
+    // Display users in the userList ul
+    function displayUsers(users) {
+      const userList = document.getElementById('userList');
+      userList.innerHTML = '';
+      if (users.length === 0) {
+        userList.innerHTML = '<li>No users found for this city.</li>';
+        return;
+      }
+      users.forEach(user => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${user.name}</strong> <br><span class="email">${user.email}</span>`;
+        userList.appendChild(li);
+      });
+    }
+
+    // Listen for city selection changes
+    document.getElementById('citySelect').addEventListener('change', function() {
+      const selectedCity = this.value;
+      if (!selectedCity) {
+        displayUsers(usersData); // Show all users if no city selected
+      } else {
+        const filtered = usersData.filter(user => user.address.city === selectedCity);
+        displayUsers(filtered);
+      }
+    });
+  </script>
+</body>
+</html>
