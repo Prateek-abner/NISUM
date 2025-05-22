@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Form Validation</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f8f8f8; }
+    #form-container { max-width: 400px; margin: 40px auto; background: #fff; padding: 24px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);}
+    label { display: block; margin-top: 12px; }
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px;
+    }
+    .error { color: #e53935; font-size: 0.95em; margin-top: 2px; }
+    button { margin-top: 18px; padding: 10px 24px; background: #1976d2; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #1565c0; }
+    .success { color: #388e3c; margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <div id="form-container">
+    <h2>Register</h2>
+    <form id="myForm" novalidate>
+      <label>
+        Name:
+        <input type="text" id="name" name="name">
+        <div class="error" id="nameError"></div>
+      </label>
+      <label>
+        Email:
+        <input type="email" id="email" name="email">
+        <div class="error" id="emailError"></div>
+      </label>
+      <label>
+        Password:
+        <input type="password" id="password" name="password">
+        <div class="error" id="passwordError"></div>
+      </label>
+      <button type="submit">Submit</button>
+      <div class="success" id="successMsg"></div>
+    </form>
+  </div>
+  <script>
+    const form = document.getElementById('myForm');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const passwordError = document.getElementById('passwordError');
+    const successMsg = document.getElementById('successMsg');
+
+    function validateEmail(email) {
+      // Simple email regex
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+      nameError.textContent = '';
+      emailError.textContent = '';
+      passwordError.textContent = '';
+      successMsg.textContent = '';
+
+      // Name validation
+      if (nameInput.value.trim() === '') {
+        nameError.textContent = 'Name is required.';
+        valid = false;
+      }
+
+      // Email validation
+      if (emailInput.value.trim() === '') {
+        emailError.textContent = 'Email is required.';
+        valid = false;
+      } else if (!validateEmail(emailInput.value.trim())) {
+        emailError.textContent = 'Please enter a valid email address.';
+        valid = false;
+      }
+
+      // Password validation
+      if (passwordInput.value.length < 6) {
+        passwordError.textContent = 'Password must be at least 6 characters.';
+        valid = false;
+      }
+
+      if (valid) {
+        successMsg.textContent = 'Form submitted successfully!';
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
