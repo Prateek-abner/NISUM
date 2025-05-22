@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TODO List with Local Storage</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f8f8f8; }
+    #todo-container { max-width: 400px; margin: 40px auto; background: #fff; padding: 24px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);}
+    #todo-input { width: 70%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+    #add-btn { padding: 8px 16px; margin-left: 8px; border: none; background: #1976d2; color: #fff; border-radius: 4px; cursor: pointer; }
+    #add-btn:hover { background: #1565c0; }
+    ul { list-style: none; padding: 0; }
+    li { display: flex; align-items: center; margin-bottom: 10px; }
+    .task-text { flex: 1; padding: 5px 8px; }
+    .completed { text-decoration: line-through; color: #888; }
+    .delete-btn { margin-left: 10px; background: #e53935; color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+    .delete-btn:hover { background: #b71c1c; }
+  </style>
+</head>
+<body>
+  <div id="todo-container">
+    <h2>TODO List</h2>
+    <input type="text" id="todo-input" placeholder="Add a new task">
+    <button id="add-btn">Add</button>
+    <ul id="todo-list"></ul>
+  </div>
+  <script>
+    let tasks = [];
+
+    // Load tasks from localStorage
+    function loadTasks() {
+      const stored = localStorage.getItem('tasks');
+      tasks = stored ? JSON.parse(stored) : [];
+    }
+
+    // Save tasks to localStorage
+    function saveTasks() {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    // Render tasks to the UI
+    function renderTasks() {
+      const list = document.getElementById('todo-list');
+      list.innerHTML = '';
+      tasks.forEach((task, idx) => {
+        const li = document.createElement('li');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = task.completed;
+        checkbox.addEventListener('change', () => toggleTask(idx));
+        const span = document.createElement('span');
+        span.textContent = task.text;
+        span.className = 'task-text' + (task.completed ? ' completed' : '');
+        const delBtn = document.createElement('button');
+        delBtn.textContent = 'Delete';
+        delBtn.className = 'delete-btn';
+        delBtn.addEventListener('click', () => deleteTask(idx));
+        li.appendChild(checkbox);
+        li.appendChild(span);
+        li.appendChild(delBtn);
+        list.appendChild(li);
+      });
+    }
+
+    // Add a new task
+    function addTask() {
+      const input = document.getElementById('todo-input');
+      const text = input.value.trim();
+      if (text) {
+        tasks.push({ text, completed: false });
+        saveTasks();
+        renderTasks();
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    // Toggle task completion
+    function toggleTask(idx) {
+      tasks[idx].completed = !tasks[idx].completed;
+      saveTasks();
+      renderTasks();
+    }
+
+    // Delete a task
+    function deleteTask(idx) {
+      tasks.splice(idx, 1);
+      saveTasks();
+      renderTasks();
+    }
+
+    // Event listeners
+    document.getElementById('add-btn').addEventListener('click', addTask);
+    document.getElementById('todo-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') addTask();
+    });
+
+    // Initialize
+    loadTasks();
+    renderTasks();
+  </script>
+</body>
+</html>
