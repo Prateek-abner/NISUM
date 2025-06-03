@@ -1,4 +1,3 @@
-// todo-app/script.js
 
 // Array to store task objects
 var tasks = [];
@@ -22,10 +21,10 @@ function addTask() {
   // Create a task object
   var task = {
     name: taskInput,
-    done: false // boolean data type
+    done: false 
   };
 
-  tasks.push(task); // Add to array
+  tasks.push(task);
 
   document.getElementById("taskInput").value = "";
   alert("Task added!");
