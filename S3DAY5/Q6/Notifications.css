@@ -1,0 +1,48 @@
+.notifications {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 16px;
+  background: #f0f4f8;
+  border-radius: 10px;
+}
+
+.notifications ul {
+  list-style: none;
+  padding: 0;
+}
+
+.notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color: #fff;
+  border-left: 4px solid #ccc;
+}
+
+.notification.read {
+  border-left-color: green;
+}
+
+.notification.unread {
+  border-left-color: red;
+  font-weight: bold;
+}
+
+.note-content p {
+  margin: 0;
+}
+
+.note-content span {
+  font-size: 12px;
+  color: gray;
+}
+
+.status {
+  font-size: 12px;
+  padding: 4px 8px;
+  background-color: #eee;
+  border-radius: 4px;
+}
