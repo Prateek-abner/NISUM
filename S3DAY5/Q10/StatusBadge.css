@@ -1,0 +1,23 @@
+.badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  margin: 5px;
+}
+
+.badge-success {
+  background-color: #28a745;
+}
+
+.badge-error {
+  background-color: #dc3545;
+}
+
+.badge-warning {
+  background-color: #ffc107;
+  color: black;
+}
