@@ -1,0 +1,10 @@
+.product-card {
+  box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+  font-family: 'Arial', sans-serif;
+  max-width: 300px;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: scale(1.02);
+}
