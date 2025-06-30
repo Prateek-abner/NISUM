@@ -1,0 +1,8 @@
+Requirement ID,Requirement Description,Test Case ID,Test Case Description
+R1,User can log in,TC1,Successful Login with Valid Credentials
+R1,User can log in,TC2,Login with Invalid Credentials
+R1,User can log in,TC3,Login with Empty Fields
+R2,User can reset password,TC4,Successful Password Reset with Valid Email
+R2,User can reset password,TC5,Password Reset with Unregistered Email
+R3,User can update profile,TC6,Successful Profile Update
+R3,User can update profile,TC7,Profile Update with Invalid Data
