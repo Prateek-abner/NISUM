@@ -4,10 +4,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -16,33 +15,29 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new CustomUserDetailsService();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public ActiveDirectoryLdapAuthenticationProvider activeDirectoryLdapAuthenticationProvider() {
-        return new ActiveDirectoryLdapAuthenticationProvider(
-                "example.com",
-                "ldap://localhost:8389",
-                "dc=example,dc=com"
-        );
+        var user = User.withUsername("user")
+                .password("{noop}password")
+                .roles("USER")
+                .build();
+        var admin = User.withUsername("admin")
+                .password("{noop}adminpass")
+                .roles("ADMIN")
+                .build();
+        return new InMemoryUserDetailsManager(user, admin);
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/user").authenticated()
-                .anyRequest().permitAll()
+                .requestMatchers("/api/user").hasRole("USER")
+                .requestMatchers("/api/admin").hasRole("ADMIN")
+                .requestMatchers("/login", "/logout").permitAll()
+                .anyRequest().authenticated()
             )
             .formLogin(form -> form
                 .loginPage("/login")
-                .defaultSuccessUrl("/api/user")
+                .defaultSuccessUrl("/dashboard")
                 .permitAll()
             )
             .logout(logout -> logout
@@ -50,8 +45,7 @@ public class SecurityConfig {
                 .logoutSuccessUrl("/login?logout")
                 .permitAll()
             )
-            .authenticationProvider(activeDirectoryLdapAuthenticationProvider())
-            .userDetailsService(userDetailsService());
+            .httpBasic();
         return http.build();
     }
 }
