@@ -21,7 +21,7 @@ public class LoginCountStreams {
         KStream<String, String> loginEvents = streamsBuilder.stream("user-login-events");
 
         Map<String, Long> initialCounts = new HashMap<>();
-        loginEvents.groupBy((key, value) -> value.split(",")[0]) // Assuming format: userId,timestamp
+        loginEvents.groupBy((key, value) -> value.split(",")[0]) 
                 .count(Materialized.as("login-counts-store"))
                 .toStream()
                 .to("login-counts");
